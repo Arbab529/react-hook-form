@@ -6,8 +6,12 @@
 
 ### Install
 
+```
 yarn add react-hook-form
+```
 
 ### How to use
 
-import {useForm} from 'react-hook-form' in a component where you want to use
+```
+import {useForm} from 'react-hook-form'
+```
