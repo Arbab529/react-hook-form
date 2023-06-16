@@ -94,3 +94,50 @@ use onSubmit on `<form>` tag
     ....
 <form/>
 ```
+
+### Form Validation
+
+Add `noValidate` to the form tag.
+
+```
+<form onSubmit={handleSubmit(onSubmit)} noValidate>
+    ....
+<form/>
+```
+
+Validate the form field by passing an object as second argument to the register function
+
+> Example: Validate Text Field
+
+```
+<input
+  type="text"
+  id="username"
+  {...register("username", {
+      required: {
+        value: true,
+        message: "Username is required",
+      }
+  })}
+/>
+```
+
+> Example: Validate Email Field
+
+```
+<input
+  type="email"
+  id="email"
+  {...register("email", {
+    pattern: {
+      value:
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      message: "Incorrect Email Format",
+    },
+    required: {
+      value: true,
+      message: "Email is required",
+    },
+  })}
+/>
+```
