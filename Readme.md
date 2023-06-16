@@ -16,7 +16,7 @@
 yarn add react-hook-form
 ```
 
-### How to use
+### Managing Form Data
 
 Import the useForm hook into your form component
 
@@ -47,4 +47,50 @@ const { register } = form;
 
 ```
 <input type="text" id="username" {...register("username")}/>
+```
+
+### Use Devtools for React hook form
+
+```
+yarn add -D @hookform/devtools
+```
+
+import it in the form component where you want to use
+
+```
+import { DevTool } from "@hookform/devtools";
+```
+
+add the component after the enclosing </form> tag. To make it tracking the form you need to get the control object returned by useForm hook
+
+```
+const { register,control } = form;
+```
+
+```
+<DevTool control={control}/>
+```
+
+### Form Submission
+
+Destructure the handleSubmit method from form
+
+```
+const {handleSubmit } = form;
+```
+
+Create onSubmit function to handleSubmit
+
+```
+const onSubmit = (data) => {
+    console.log("Form Submitted: ", data);
+  };
+```
+
+use onSubmit on <form> tag
+
+```
+<form onSubmit={handleSubmit(onSubmit)}>
+    ....
+<form/>
 ```
