@@ -61,7 +61,7 @@ import it in the form component where you want to use
 import { DevTool } from "@hookform/devtools";
 ```
 
-add the component after the enclosing </form> tag. To make it tracking the form you need to get the control object returned by useForm hook
+add the component after the enclosing `</form>` tag. To make it tracking the form you need to get the control object returned by useForm hook
 
 ```
 const { register,control } = form;
@@ -87,7 +87,7 @@ const onSubmit = (data) => {
   };
 ```
 
-use onSubmit on <form> tag
+use onSubmit on `<form>` tag
 
 ```
 <form onSubmit={handleSubmit(onSubmit)}>
