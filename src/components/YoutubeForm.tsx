@@ -6,6 +6,7 @@ type formValues = {
   username: string;
   email: string;
   channel: string;
+  domain: string;
 };
 
 const YoutubeForm = () => {
@@ -57,6 +58,26 @@ const YoutubeForm = () => {
               value: true,
               message: "Email is required",
             },
+            validate: {
+              notAdmin: (value) => {
+                return (
+                  value !== "admin@gmail.com" ||
+                  "Email not supported. Please use any other email"
+                );
+              },
+              notBlackListed: (value) => {
+                return (
+                  !value.endsWith("domain.com") ||
+                  `Accounts with (domain.com) are not allowed`
+                );
+              },
+              checkAdmin: (value) => {
+                return (
+                  !value.startsWith("admin") ||
+                  "Email should be other then admin"
+                );
+              },
+            },
           })}
         />
         <p className="error">{errors.email?.message}</p>
@@ -73,6 +94,24 @@ const YoutubeForm = () => {
           })}
         />
         <p className="error">{errors.channel?.message}</p>
+
+        <label htmlFor="domain">Domain</label>
+        <input
+          type="text"
+          id="domain"
+          {...register("domain", {
+            required: {
+              value: true,
+              message: "Domain is required",
+            },
+            validate: {
+              blackListDomain: (value) => {
+                return value !== "domain.com" || "This domain is blacklisted";
+              },
+            },
+          })}
+        />
+        <p className="error">{errors.domain?.message}</p>
 
         <button>Submit</button>
       </form>

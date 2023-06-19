@@ -168,3 +168,34 @@ Now in order to show this error. You need to use the `errors` property.
   <p>{errors.username?.message}</p>
 </div>
 ```
+
+## Custom Validation
+
+In order to use custom validations. You have to use `validate` object and then you can pass on the key value pairs to that.
+
+> Example: Check If user will enter domain.com it will show an error message that `This domain is blacklisted`
+
+`key:` blackListDomain
+
+`value:` function that contains the input value
+
+```
+<div className="form-control">
+    <input
+        type="text"
+        id="domain"
+        {...register("domain", {
+            required: {
+            value: true,
+            message: "Domain is required",
+            },
+            validate: {
+            blackListDomain: (value) => {
+                return value !== "domain.com" || "This domain is blacklisted";
+            },
+            },
+        })}
+    />
+    <p className="error">{errors.domain?.message}</p>
+</div>
+```
