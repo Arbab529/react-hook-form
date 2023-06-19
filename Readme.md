@@ -173,7 +173,7 @@ Now in order to show this error. You need to use the `errors` property.
 
 In order to use custom validations. You have to use `validate` object and then you can pass on the key value pairs to that.
 
-> Example: Check If user will enter domain.com it will show an error message that `This domain is blacklisted`
+> Example: Check If user has entered domain.com then it will show an error message that `This domain is blacklisted`
 
 `key:` blackListDomain
 
