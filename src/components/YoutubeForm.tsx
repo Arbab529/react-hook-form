@@ -10,7 +10,8 @@ type formValues = {
 
 const YoutubeForm = () => {
   const form = useForm<formValues>();
-  const { register, control, handleSubmit } = form;
+  const { register, control, handleSubmit, formState } = form;
+  const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
 
   const onSubmit = (data: formValues) => {
@@ -32,6 +33,7 @@ const YoutubeForm = () => {
             },
           })}
         />
+        <p className="error">{errors.username?.message}</p>
         {/* <input
           type="text"
           id="username"
@@ -57,9 +59,20 @@ const YoutubeForm = () => {
             },
           })}
         />
+        <p className="error">{errors.email?.message}</p>
 
         <label htmlFor="channel">Channel</label>
-        <input type="text" id="channel" {...register("channel")} />
+        <input
+          type="text"
+          id="channel"
+          {...register("channel", {
+            required: {
+              value: true,
+              message: "Channel is required",
+            },
+          })}
+        />
+        <p className="error">{errors.channel?.message}</p>
 
         <button>Submit</button>
       </form>

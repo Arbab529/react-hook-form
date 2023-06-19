@@ -141,3 +141,30 @@ Validate the form field by passing an object as second argument to the register 
   })}
 />
 ```
+
+### Display Error Message
+
+Destructure `formState` from `form` Object and `errors` from `formState`.
+
+```
+const { formState } = form;
+const { errors } = formState;
+```
+
+Now in order to show this error. You need to use the `errors` property.
+
+```
+<div className="form-control">
+  <input
+    type="text"
+    id="username"
+    {...register("username", {
+        required: {
+          value: true,
+          message: "Username is required",
+        }
+    })}
+  />
+  <p>{errors.username?.message}</p>
+</div>
+```

@@ -23,13 +23,13 @@ input[type="date"] {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 30px;
 }
 
 .error {
   color: red;
-  font-size: 12px;
+  font-size: 17px;
   text-align: left;
+  margin-bottom: 30px;
 }
 
 .form-control {
