@@ -40,7 +40,7 @@ const EnhancedFormCopy = () => {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
 
@@ -52,12 +52,16 @@ const EnhancedFormCopy = () => {
   const onSubmit = (data: formValues) => {
     console.log("Form Submitted: ", data);
   };
+
+  const watchData = watch();
+
   return (
     <div>
       <h1>Enhanced Form</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        {/* <div className="form-control">
+        Submitted by: {watchData.username}
+        <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -70,8 +74,7 @@ const EnhancedFormCopy = () => {
             })}
           />
           <p className="error">{errors.username?.message}</p>
-        </div> */}
-
+        </div>
         {/* <input
           type="text"
           id="username"
@@ -80,7 +83,6 @@ const EnhancedFormCopy = () => {
           onChange={onChange}
           onBlur={onBlur}
         /> */}
-
         <div className="form-control">
           <label htmlFor="email">E-mail</label>
           <input
@@ -120,7 +122,6 @@ const EnhancedFormCopy = () => {
           />
           <p className="error">{errors.email?.message}</p>
         </div>
-
         {/* <label htmlFor="channel">Channel</label>
         <input
           type="text"
@@ -151,7 +152,6 @@ const EnhancedFormCopy = () => {
           })}
         />
         <p className="error">{errors.domain?.message}</p> */}
-
         <div className="form-control">
           <label htmlFor="social.facebook">Facebook</label>
           <input
@@ -161,7 +161,6 @@ const EnhancedFormCopy = () => {
           />
           <p className="error"></p>
         </div>
-
         {/* <div className="form-control">
           <label htmlFor="social.twitter">Twitter</label>
           <input
@@ -171,7 +170,6 @@ const EnhancedFormCopy = () => {
           />
           <p className="error"></p>
         </div> */}
-
         {/* <div className="form-control">
           <label htmlFor="primary-phone">Primary Phone Number</label>
           <input
@@ -186,12 +184,10 @@ const EnhancedFormCopy = () => {
           />
           <p className="error">{errors.phoneNumbers[0]?.message}</p>
         </div> */}
-
         {/* <div className="form-control">
           <label htmlFor="second-phone">Secondary Phone Number</label>
           <input type="tel" id="second-phone" {...register("phoneNumbers.1")} />
         </div> */}
-
         <div className="form-control">
           <div>
             <label>List of Phone Numbers</label>
@@ -221,7 +217,6 @@ const EnhancedFormCopy = () => {
           </div>
           <p className="error"></p>
         </div>
-
         <div className="form-control">
           <label htmlFor="age">Age</label>
           <input
@@ -237,7 +232,6 @@ const EnhancedFormCopy = () => {
           />
           <p className="error">{errors.age?.message}</p>
         </div>
-
         <div className="form-control">
           <label htmlFor="age">Date of birth</label>
           <input
@@ -253,7 +247,6 @@ const EnhancedFormCopy = () => {
           />
           <p className="error">{errors.age?.message}</p>
         </div>
-
         <button>Submit</button>
       </form>
       <DevTool control={control} />

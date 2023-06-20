@@ -382,3 +382,30 @@ In order to use `number` and `date` type data in field, `register` method provid
   })}
 />
 ```
+
+## Realtime data rendering on DOM
+
+In order to use see the realtime data rendering on dom `useForm` hook provide a `watch` method.
+
+```
+const form = useForm();
+
+const {watch} = form;
+
+const watchData = watch(); // will return whole data
+```
+
+OR
+
+```
+const watchData = watch("username"); // will return username only
+```
+
+OR
+
+```
+const watchData = watch(["username","email"]); // will return username and email only
+
+```
+
+This `watchData` variable will hold the full data of the form which you can use to render realtime on DOM.
