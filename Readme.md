@@ -1,4 +1,4 @@
-### React hook form helps in:
+## React hook form helps in:
 
 1. Managing form data
    - Every form has a few moving parts that keep changing from the time a user loads the form to the time they submit it.
@@ -10,13 +10,13 @@
 2. Submitting form data
 3. Enforce validations and provide visual feedback
 
-### Install
+## Install
 
 ```
 yarn add react-hook-form
 ```
 
-### Managing Form Data
+## Managing Form Data
 
 Import the useForm hook into your form component
 
@@ -49,7 +49,7 @@ const { register } = form;
 <input type="text" id="username" {...register("username")}/>
 ```
 
-### Use Devtools for React hook form
+## Use Devtools for React hook form
 
 ```
 yarn add -D @hookform/devtools
@@ -71,7 +71,7 @@ const { register,control } = form;
 <DevTool control={control}/>
 ```
 
-### Form Submission
+## Form Submission
 
 Destructure the handleSubmit method from form
 
@@ -95,7 +95,7 @@ use onSubmit on `<form>` tag
 <form/>
 ```
 
-### Form Validation
+## Form Validation
 
 Add `noValidate` to the form tag.
 
@@ -142,7 +142,7 @@ Validate the form field by passing an object as second argument to the register 
 />
 ```
 
-### Display Error Message
+## Display Error Message
 
 Destructure `formState` from `form` Object and `errors` from `formState`.
 
