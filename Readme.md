@@ -199,3 +199,37 @@ In order to use custom validations. You have to use `validate` object and then y
     <p className="error">{errors.domain?.message}</p>
 </div>
 ```
+
+## Default Values
+
+In order to pass default values to your form you can use `defaultValues` as an object in `useForm` hook.
+
+```
+const form = useForm({
+  defaultValues: {
+    username: "",
+    email: "",
+    channel: "",
+    domain: "",
+  },
+});
+```
+
+In order to get data from `API` you can use `defaultValues` as a `function`
+
+```
+const form = useForm({
+  defaultValues: async () => {
+    const response = await fetch(
+    "https://jsonplaceholder.typicode.com/users/1"
+    );
+    const data = await response.json();
+    return {
+    username: "",
+    email: data?.email,
+    channel: "",
+    domain: "",
+    };
+  },
+});
+```

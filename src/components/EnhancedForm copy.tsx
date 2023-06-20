@@ -9,8 +9,15 @@ type formValues = {
   domain: string;
 };
 
-const YoutubeForm = () => {
-  const form = useForm<formValues>();
+const EnhancedForm = () => {
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      channel: "",
+      domain: "",
+    },
+  });
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
@@ -20,7 +27,7 @@ const YoutubeForm = () => {
   };
   return (
     <div>
-      <h1>Simple Form</h1>
+      <h1>Enhanced Form</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <label htmlFor="username">Username</label>
@@ -120,4 +127,4 @@ const YoutubeForm = () => {
   );
 };
 
-export default YoutubeForm;
+export default EnhancedForm;
