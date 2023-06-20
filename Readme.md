@@ -233,3 +233,38 @@ const form = useForm({
   },
 });
 ```
+
+## Nested Objects
+
+Define the default state in `useForm` hook
+
+```
+const form = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      social: {
+        facebook: "",
+        twitter: "",
+      },
+    },
+  });
+```
+
+In order to use the nested value you need to use `dot(.) notation` in register.
+
+```
+ <input
+    type="text"
+    id="facebook"
+    {...register("social.facebook")}
+/>
+```
+
+```
+<input
+    type="text"
+    id="social.twitter"
+    {...register("social.twitter")}
+/>
+```

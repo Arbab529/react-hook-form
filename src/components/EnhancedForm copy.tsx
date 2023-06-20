@@ -7,15 +7,23 @@ type formValues = {
   email: string;
   channel: string;
   domain: string;
+  social: {
+    facebook: string;
+    twitter: string;
+  };
 };
 
-const EnhancedForm = () => {
+const EnhancedFormCopy = () => {
   const form = useForm({
     defaultValues: {
       username: "",
       email: "",
       channel: "",
       domain: "",
+      social: {
+        facebook: "",
+        twitter: "",
+      },
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -89,7 +97,7 @@ const EnhancedForm = () => {
         />
         <p className="error">{errors.email?.message}</p>
 
-        <label htmlFor="channel">Channel</label>
+        {/* <label htmlFor="channel">Channel</label>
         <input
           type="text"
           id="channel"
@@ -118,7 +126,23 @@ const EnhancedForm = () => {
             },
           })}
         />
-        <p className="error">{errors.domain?.message}</p>
+        <p className="error">{errors.domain?.message}</p> */}
+
+        <label htmlFor="social.facebook">Facebook</label>
+        <input
+          type="text"
+          id="social.facebook"
+          {...register("social.facebook")}
+        />
+        <p className="error"></p>
+
+        <label htmlFor="social.twitter">Twitter</label>
+        <input
+          type="text"
+          id="social.twitter"
+          {...register("social.twitter")}
+        />
+        <p className="error"></p>
 
         <button>Submit</button>
       </form>
@@ -127,4 +151,4 @@ const EnhancedForm = () => {
   );
 };
 
-export default EnhancedForm;
+export default EnhancedFormCopy;
