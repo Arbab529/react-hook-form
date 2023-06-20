@@ -31,9 +31,9 @@ input[type="password"] {
   color: red;
   font-size: 17px;
   text-align: left;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .form-control {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }

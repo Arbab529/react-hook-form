@@ -15,6 +15,8 @@ type formValues = {
   phNumbers: {
     number: string;
   }[];
+  age: number;
+  dob: Date;
 };
 
 const EnhancedFormCopy = () => {
@@ -34,6 +36,8 @@ const EnhancedFormCopy = () => {
           number: "",
         },
       ],
+      age: 0,
+      dob: new Date(),
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -53,18 +57,21 @@ const EnhancedFormCopy = () => {
       <h1>Enhanced Form</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          {...register("username", {
-            required: {
-              value: true,
-              message: "Username is required",
-            },
-          })}
-        />
-        <p className="error">{errors.username?.message}</p>
+        {/* <div className="form-control">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            {...register("username", {
+              required: {
+                value: true,
+                message: "Username is required",
+              },
+            })}
+          />
+          <p className="error">{errors.username?.message}</p>
+        </div> */}
+
         {/* <input
           type="text"
           id="username"
@@ -74,43 +81,45 @@ const EnhancedFormCopy = () => {
           onBlur={onBlur}
         /> */}
 
-        <label htmlFor="email">E-mail</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email", {
-            pattern: {
-              value:
-                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-              message: "Incorrect Email Format",
-            },
-            required: {
-              value: true,
-              message: "Email is required",
-            },
-            validate: {
-              notAdmin: (value) => {
-                return (
-                  value !== "admin@gmail.com" ||
-                  "Email not supported. Please use any other email"
-                );
+        <div className="form-control">
+          <label htmlFor="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            {...register("email", {
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: "Incorrect Email Format",
               },
-              notBlackListed: (value) => {
-                return (
-                  !value.endsWith("domain.com") ||
-                  `Accounts with (domain.com) are not allowed`
-                );
+              required: {
+                value: true,
+                message: "Email is required",
               },
-              checkAdmin: (value) => {
-                return (
-                  !value.startsWith("admin") ||
-                  "Email should be other then admin"
-                );
+              validate: {
+                notAdmin: (value) => {
+                  return (
+                    value !== "admin@gmail.com" ||
+                    "Email not supported. Please use any other email"
+                  );
+                },
+                notBlackListed: (value) => {
+                  return (
+                    !value.endsWith("domain.com") ||
+                    `Accounts with (domain.com) are not allowed`
+                  );
+                },
+                checkAdmin: (value) => {
+                  return (
+                    !value.startsWith("admin") ||
+                    "Email should be other then admin"
+                  );
+                },
               },
-            },
-          })}
-        />
-        <p className="error">{errors.email?.message}</p>
+            })}
+          />
+          <p className="error">{errors.email?.message}</p>
+        </div>
 
         {/* <label htmlFor="channel">Channel</label>
         <input
@@ -143,59 +152,106 @@ const EnhancedFormCopy = () => {
         />
         <p className="error">{errors.domain?.message}</p> */}
 
-        <label htmlFor="social.facebook">Facebook</label>
-        <input
-          type="text"
-          id="social.facebook"
-          {...register("social.facebook")}
-        />
-        <p className="error"></p>
+        <div className="form-control">
+          <label htmlFor="social.facebook">Facebook</label>
+          <input
+            type="text"
+            id="social.facebook"
+            {...register("social.facebook")}
+          />
+          <p className="error"></p>
+        </div>
 
-        <label htmlFor="social.twitter">Twitter</label>
-        <input
-          type="text"
-          id="social.twitter"
-          {...register("social.twitter")}
-        />
-        <p className="error"></p>
+        {/* <div className="form-control">
+          <label htmlFor="social.twitter">Twitter</label>
+          <input
+            type="text"
+            id="social.twitter"
+            {...register("social.twitter")}
+          />
+          <p className="error"></p>
+        </div> */}
 
-        {/* <label htmlFor="primary-phone">Primary Phone Number</label>
-        <input
-          type="tel"
-          id="primary-phone"
-          {...register("phoneNumbers.0", {
-            required: {
-              value: true,
-              message: "Phone number must be entered",
-            },
-          })}
-        /> */}
-        {/* <p className="error">{errors.phoneNumbers[0]?.message}</p> */}
+        {/* <div className="form-control">
+          <label htmlFor="primary-phone">Primary Phone Number</label>
+          <input
+            type="tel"
+            id="primary-phone"
+            {...register("phoneNumbers.0", {
+              required: {
+                value: true,
+                message: "Phone number must be entered",
+              },
+            })}
+          />
+          <p className="error">{errors.phoneNumbers[0]?.message}</p>
+        </div> */}
 
-        {/* <label htmlFor="second-phone">Secondary Phone Number</label>
-        <input type="tel" id="second-phone" {...register("phoneNumbers.1")} /> */}
+        {/* <div className="form-control">
+          <label htmlFor="second-phone">Secondary Phone Number</label>
+          <input type="tel" id="second-phone" {...register("phoneNumbers.1")} />
+        </div> */}
 
-        <div>
-          <label>List of Phone Numbers</label>
+        <div className="form-control">
           <div>
-            {fields.map((field, index) => (
-              <div className="form-control" key={field.id}>
-                <input
-                  type="text"
-                  id="phNumbers"
-                  {...register(`phNumbers.${index}.number`)}
-                />
-                {index > 0 && (
-                  <button type="button" onClick={() => remove(index)}>
-                    -
-                  </button>
-                )}
-              </div>
-            ))}
-            <button type="button" onClick={() => append({ number: "" })}>
-              +
-            </button>
+            <label>List of Phone Numbers</label>
+            <div>
+              {fields.map((field, index) => (
+                <div className="form-control" key={field.id}>
+                  <input
+                    type="text"
+                    id="phNumbers"
+                    {...register(`phNumbers.${index}.number`)}
+                  />
+                  {index > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => remove(index)}
+                      style={{ marginTop: "20px" }}
+                    >
+                      -
+                    </button>
+                  )}
+                </div>
+              ))}
+              <button type="button" onClick={() => append({ number: "" })}>
+                +
+              </button>
+            </div>
           </div>
+          <p className="error"></p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="age">Age</label>
+          <input
+            type="text"
+            id="age"
+            {...register("age", {
+              valueAsNumber: true,
+              required: {
+                value: true,
+                message: "Age is required",
+              },
+            })}
+          />
+          <p className="error">{errors.age?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="age">Date of birth</label>
+          <input
+            type="date"
+            id="dob"
+            {...register("dob", {
+              valueAsDate: true,
+              required: {
+                value: true,
+                message: "Dob is required",
+              },
+            })}
+          />
+          <p className="error">{errors.age?.message}</p>
         </div>
 
         <button>Submit</button>

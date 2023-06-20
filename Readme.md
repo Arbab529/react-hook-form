@@ -347,3 +347,38 @@ const { fields, append, remove } = useFieldArray({
     </div>
   </div>
 ```
+
+## Number and Date type data
+
+In order to use `number` and `date` type data in field, `register` method provides the following properties:
+
+- `valueAsNumber`
+- `valueAsDate`
+
+> Example: Number field
+
+```
+<input type="text" id="age"
+  {...register("age", {
+    valueAsNumber: true,
+    required: {
+      value: true,
+      message: "Age is required",
+    },
+  })}
+/>
+```
+
+> Example: Date field
+
+```
+<input type="date" id="dob"
+  {...register("dob", {
+    valueAsDate: true,
+    required: {
+      value: true,
+      message: "Dob is required",
+    },
+  })}
+/>
+```
