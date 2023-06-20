@@ -302,3 +302,48 @@ In order to use the array value you need to use `dot(.) notation` in register be
   {...register("phoneNumbers.1")}
 />
 ```
+
+## Dynamic Fields
+
+In order to create dynamic fields `react-hook-form` provides a hook called `useFieldArray`
+
+First import the hook
+
+```
+import { useFieldArray } from "react-hook-form";
+```
+
+destructure the `field` `append` `remove` from `useFieldArray` and pass the `name`and `control` as object to the hook.
+
+```
+const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
+});
+```
+
+> Example: Make dynamic phone numbers field.
+
+```
+  <div>
+    <label>List of Phone Numbers</label>
+    <div>
+      {fields.map((field, index) => (
+        <div className="form-control" key={field.id}>
+
+          <input
+            type="text"
+            id="phNumbers"
+            {...register(`phNumbers.${index}.number`)}
+          />
+
+          {index > 0 && (
+            <button type="button" onClick={() => remove(index)}>-</button>
+          )}
+
+        </div>
+      ))}
+      <button type="button" onClick={() => append({ number: "" })}>+</button>
+    </div>
+  </div>
+```

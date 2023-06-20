@@ -1,5 +1,5 @@
 import {} from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 type formValues = {
@@ -12,6 +12,9 @@ type formValues = {
     twitter: string;
   };
   phoneNumbers: string[];
+  phNumbers: {
+    number: string;
+  }[];
 };
 
 const EnhancedFormCopy = () => {
@@ -26,11 +29,21 @@ const EnhancedFormCopy = () => {
         twitter: "",
       },
       phoneNumbers: ["", ""],
+      phNumbers: [
+        {
+          number: "",
+        },
+      ],
     },
   });
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
+
+  const { fields, append, remove } = useFieldArray({
+    name: "phNumbers",
+    control,
+  });
 
   const onSubmit = (data: formValues) => {
     console.log("Form Submitted: ", data);
@@ -146,14 +159,46 @@ const EnhancedFormCopy = () => {
         />
         <p className="error"></p>
 
-        <label htmlFor="primary-phone">Primary Phone Number</label>
-        <input type="tel" id="primary-phone" {...register("phoneNumbers.0")} />
-        <p className="error"></p>
+        {/* <label htmlFor="primary-phone">Primary Phone Number</label>
+        <input
+          type="tel"
+          id="primary-phone"
+          {...register("phoneNumbers.0", {
+            required: {
+              value: true,
+              message: "Phone number must be entered",
+            },
+          })}
+        /> */}
+        {/* <p className="error">{errors.phoneNumbers[0]?.message}</p> */}
 
-        <label htmlFor="second-phone">Secondary Phone Number</label>
-        <input type="tel" id="second-phone" {...register("phoneNumbers.1")} />
+        {/* <label htmlFor="second-phone">Secondary Phone Number</label>
+        <input type="tel" id="second-phone" {...register("phoneNumbers.1")} /> */}
 
-        <button>Submit</button> 
+        <div>
+          <label>List of Phone Numbers</label>
+          <div>
+            {fields.map((field, index) => (
+              <div className="form-control" key={field.id}>
+                <input
+                  type="text"
+                  id="phNumbers"
+                  {...register(`phNumbers.${index}.number`)}
+                />
+                {index > 0 && (
+                  <button type="button" onClick={() => remove(index)}>
+                    -
+                  </button>
+                )}
+              </div>
+            ))}
+            <button type="button" onClick={() => append({ number: "" })}>
+              +
+            </button>
+          </div>
+        </div>
+
+        <button>Submit</button>
       </form>
       <DevTool control={control} />
     </div>
