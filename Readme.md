@@ -268,3 +268,37 @@ In order to use the nested value you need to use `dot(.) notation` in register.
     {...register("social.twitter")}
 />
 ```
+
+## Array Data
+
+Define the default state in `useForm` hook
+
+```
+const form = useForm({
+    defaultValues: {
+      social: {
+        facebook: "",
+        twitter: "",
+      },
+      phoneNumbers:["",""]
+    },
+  });
+```
+
+In order to use the array value you need to use `dot(.) notation` in register because `react-hook-form` doesn't support bracket `[0]` syntax in JSX.
+
+```
+<input
+  type="text"
+  id="primary-phone"
+  {...register("phoneNumbers.0")}
+/>
+```
+
+```
+<input
+  type="text"
+  id="secondary-phone"
+  {...register("phoneNumbers.1")}
+/>
+```

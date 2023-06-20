@@ -11,6 +11,7 @@ type formValues = {
     facebook: string;
     twitter: string;
   };
+  phoneNumbers: string[];
 };
 
 const EnhancedFormCopy = () => {
@@ -24,6 +25,7 @@ const EnhancedFormCopy = () => {
         facebook: "",
         twitter: "",
       },
+      phoneNumbers: ["", ""],
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -144,7 +146,14 @@ const EnhancedFormCopy = () => {
         />
         <p className="error"></p>
 
-        <button>Submit</button>
+        <label htmlFor="primary-phone">Primary Phone Number</label>
+        <input type="tel" id="primary-phone" {...register("phoneNumbers.0")} />
+        <p className="error"></p>
+
+        <label htmlFor="second-phone">Secondary Phone Number</label>
+        <input type="tel" id="second-phone" {...register("phoneNumbers.1")} />
+
+        <button>Submit</button> 
       </form>
       <DevTool control={control} />
     </div>

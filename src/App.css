@@ -14,7 +14,9 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="number"],
-input[type="date"] {
+input[type="date"],
+input[type="tel"],
+input[type="password"] {
   display: block;
   width: 400px;
   padding: 6px 12px;
