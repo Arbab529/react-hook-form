@@ -43,7 +43,15 @@ const EnhancedFormCopy = () => {
     },
   });
 
-  const { register, control, handleSubmit, formState, watch, getValues } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
 
@@ -67,6 +75,17 @@ const EnhancedFormCopy = () => {
 
   const handleGetValues = () => {
     console.log("Get Values", getValues());
+  };
+
+  const handleSetValues = () => {
+    console.log(
+      "Set Values",
+      setValue("username", "Arbab", {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true,
+      })
+    );
   };
 
   render++;
@@ -266,6 +285,9 @@ const EnhancedFormCopy = () => {
         <button>Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get Values
+        </button>
+        <button type="button" onClick={handleSetValues}>
+          Set Values
         </button>
       </form>
       <DevTool control={control} />

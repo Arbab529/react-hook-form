@@ -444,3 +444,32 @@ Create a button that will trigger this method.
 ```
 <button type="button" onClick={handleGetValues}>Get Values</button>
 ```
+
+## setValue
+
+This function allows you to dynamically set the value of a registered field and have the options to validate and update the form state. At the same time, it tries to avoid unnecessary rerender.
+
+```
+const { setValue } = form;
+```
+
+It take three arguments (name of field, updated value, options).
+
+```
+const handleSetValues = () => {
+  console.log(
+    "Set Values",
+    setValue("username", "Arbab", {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    })
+  );
+};
+```
+
+Create a button that will trigger this method.
+
+```
+<button type="button" onClick={handleSetValues}>Set Values</button>
+```
