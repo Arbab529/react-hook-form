@@ -409,3 +409,38 @@ const watchData = watch(["username","email"]); // will return username and email
 ```
 
 This `watchData` variable will hold the full data of the form which you can use to render realtime on DOM.
+
+## Avoid component rerendering on watch
+
+You can avoid component rerendering on watch by using the `callback` function. The example below will watch and log the input changes but it will not re render the component.
+
+```
+useEffect(() => {
+  const subscription = watch((val) => {
+    console.log(val);
+  });
+  return () => subscription.unsubscribe();
+}, [watch]);
+```
+
+## Get Values
+
+An optimized helper for reading form values. The difference between `watch` and `getValues` is that getValues will not trigger re-renders or subscribe to input changes.
+
+```
+const { getValues } = form;
+```
+
+You can get the specific values also by passing the required field as an argument to the getValues. `getValues("name")` or `getValues(["name","age"])`
+
+```
+const handleGetValues = () => {
+  console.log("Get Values", getValues());
+};
+```
+
+Create a button that will trigger this method.
+
+```
+<button type="button" onClick={handleGetValues}>Get Values</button>
+```

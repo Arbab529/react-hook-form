@@ -1,4 +1,4 @@
-import {} from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
@@ -18,6 +18,8 @@ type formValues = {
   age: number;
   dob: Date;
 };
+
+let render = 0;
 
 const EnhancedFormCopy = () => {
   const form = useForm({
@@ -40,7 +42,8 @@ const EnhancedFormCopy = () => {
       dob: new Date(),
     },
   });
-  const { register, control, handleSubmit, formState, watch } = form;
+
+  const { register, control, handleSubmit, formState, watch, getValues } = form;
   const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
 
@@ -53,14 +56,27 @@ const EnhancedFormCopy = () => {
     console.log("Form Submitted: ", data);
   };
 
-  const watchData = watch();
+  // const watchData = watch();
+
+  useEffect(() => {
+    const subscription = watch((val) => {
+      console.log(val);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  const handleGetValues = () => {
+    console.log("Get Values", getValues());
+  };
+
+  render++;
 
   return (
     <div>
-      <h1>Enhanced Form</h1>
+      <h1>Latest Form {render / 2}</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        Submitted by: {watchData.username}
+        {/* Submitted by: {watchData.username} */}
         <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
@@ -248,6 +264,9 @@ const EnhancedFormCopy = () => {
           <p className="error">{errors.age?.message}</p>
         </div>
         <button>Submit</button>
+        <button type="button" onClick={handleGetValues}>
+          Get Values
+        </button>
       </form>
       <DevTool control={control} />
     </div>
